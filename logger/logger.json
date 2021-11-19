@@ -1,0 +1,7 @@
+{
+  "level": "DEBUG",
+  "file": {
+    "logPath": "${application.path}/log/",
+    "level": "INFO"
+  }
+}
