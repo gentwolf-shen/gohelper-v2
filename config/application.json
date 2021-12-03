@@ -8,7 +8,9 @@
             "type": "mysql",
             "dsn": "dbuser:dbpassword@tcp(dbhost:3306)/dbname?charset=utf8",
             "maxOpenConnections": 1,
-            "maxIdleConnections": 1
-        }
+            "maxIdleConnections": 1,
+			"maxLifeTime":        3600,
+			"maxIdleTime":        1800
+		}
 	}
 }
