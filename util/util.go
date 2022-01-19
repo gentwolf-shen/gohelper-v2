@@ -64,8 +64,12 @@ func SubString(str string, start, length int) string {
 	return string(s)
 }
 
-func Ceil(size, count int32) int32 {
-	return int32(math.Ceil(float64(count) / float64(size)))
+func Ceil(size, count int64) int64 {
+	return int64(math.Ceil(float64(count) / float64(size)))
+}
+
+func ToOffset(page, size int64) int64 {
+	return (page - 1) * size
 }
 
 func Uuid() string {
@@ -127,4 +131,14 @@ func ToUnderScore(str string) string {
 
 func ToLowFirst(str string) string {
 	return strings.ToLower(str[0:1]) + str[1:]
+}
+
+func FixPageAndSize(page, size, defaultSize int64) (int64, int64) {
+	if page < 1 {
+		page = 1
+	}
+	if size < 1 {
+		size = defaultSize
+	}
+	return page, size
 }
