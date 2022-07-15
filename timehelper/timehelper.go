@@ -57,6 +57,12 @@ func ToTimestamp(date, format string) int64 {
 	return t.Unix()
 }
 
+//将日期转换为unix timestamp
+func ToTimestampLocal(date, format string) int64 {
+	t, _ := time.ParseInLocation(format, date, time.Local)
+	return t.Unix()
+}
+
 //取每月的天数
 func MonthDays(year, month int) int {
 	days := 0
