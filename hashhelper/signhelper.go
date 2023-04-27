@@ -1,10 +1,8 @@
-package signhelper
+package hashhelper
 
 import (
 	"sort"
 	"strings"
-
-	"github.com/gentwolf-shen/gohelper-v2/hashhelper"
 )
 
 const (
@@ -23,11 +21,11 @@ func GetSign(params map[string]string, secret string, signType int, joiner, sepa
 
 	switch signType {
 	case MD5:
-		signStr = hashhelper.Md5(str)
+		signStr = Md5(str)
 	case SHA1:
-		signStr = hashhelper.Sha1(str)
+		signStr = Sha1(str)
 	case SHA256:
-		signStr = hashhelper.Sha256(str)
+		signStr = Sha256(str)
 	}
 
 	return signStr
