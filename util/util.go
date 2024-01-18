@@ -142,3 +142,20 @@ func FixPageAndSize(page, size, defaultSize int64) (int64, int64) {
 	}
 	return page, size
 }
+
+func SafeStrFilter(str string) string {
+	str = strings.ReplaceAll(str, `"`, "")
+	str = strings.ReplaceAll(str, `'`, "")
+	str = strings.ReplaceAll(str, `/*`, "")
+	str = strings.ReplaceAll(str, `*/`, "")
+	str = strings.ReplaceAll(str, `#`, "")
+	str = strings.ReplaceAll(str, `--`, "")
+
+	return str
+}
+
+func SafeStr(str string) string {
+	str = strings.ReplaceAll(str, "'", "&#39;")
+	str = strings.ReplaceAll(str, "\"", "&quot;")
+	return str
+}

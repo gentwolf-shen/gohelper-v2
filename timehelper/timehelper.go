@@ -20,19 +20,19 @@ func init() {
 	Format.Time = "15:04:05"
 }
 
-//取当前时间的unix timestamp
+// 取当前时间的unix timestamp
 func Timestamp() int64 {
 	return time.Now().Unix()
 }
 
-//取标准时间
+// 取标准时间
 func UtcDate() string {
 	t := time.Now().UTC()
 	format := "%d-%0.2d-%0.2dT%0.2d:%0.2d:%0.2d.012Z"
 	return fmt.Sprintf(format, t.Year(), t.Month(), t.Day(), t.Hour(), t.Minute(), t.Second())
 }
 
-//格式化unix timestamp
+// 格式化unix timestamp
 func Date(timestamp int64, args ...string) string {
 	layout := Format.DateTime
 	if args != nil {
@@ -41,7 +41,7 @@ func Date(timestamp int64, args ...string) string {
 	return time.Unix(timestamp, 0).Format(layout)
 }
 
-//格式化当前时间
+// 格式化当前时间
 func Today(args ...string) string {
 	layout := Format.DateTime
 	if args != nil {
@@ -50,20 +50,20 @@ func Today(args ...string) string {
 	return time.Now().Format(layout)
 }
 
-//将日期转换为unix timestamp
+// 将日期转换为unix timestamp
 func ToTimestamp(date, format string) int64 {
 	loc, _ := time.LoadLocation("Asia/Shanghai")
 	t, _ := time.ParseInLocation(format, date, loc)
 	return t.Unix()
 }
 
-//将日期转换为unix timestamp
+// 将日期转换为unix timestamp
 func ToTimestampLocal(date, format string) int64 {
 	t, _ := time.ParseInLocation(format, date, time.Local)
 	return t.Unix()
 }
 
-//取每月的天数
+// 取每月的天数
 func MonthDays(year, month int) int {
 	days := 0
 	switch month {
@@ -88,7 +88,7 @@ func MonthDays(year, month int) int {
 	return days
 }
 
-//将日期加上一个时间段
+// 将日期加上一个时间段
 func DateAddDuration(day string, duration time.Duration, args ...string) string {
 	format := Format.Date
 	if len(args) > 0 {
@@ -99,22 +99,22 @@ func DateAddDuration(day string, duration time.Duration, args ...string) string 
 	return t.Add(duration).Format(format)
 }
 
-//将日期加上多少月
+// 将日期加上多少月
 func AddMonths(day string, months int, args ...string) string {
 	return Add(day, 0, months, 0, args...)
 }
 
-//将日期加上多少天
+// 将日期加上多少天
 func AddDays(day string, days int, args ...string) string {
 	return Add(day, 0, 0, days, args...)
 }
 
-//将日期加上多少年
+// 将日期加上多少年
 func AddYears(day string, years int, args ...string) string {
 	return Add(day, years, 0, 0, args...)
 }
 
-//将日期加上年月日
+// 将日期加上年月日
 func Add(day string, years, months, days int, args ...string) string {
 	format := Format.Date
 	if len(args) > 0 {
@@ -125,15 +125,15 @@ func Add(day string, years, months, days int, args ...string) string {
 	return t.AddDate(years, months, days).Format(format)
 }
 
-//计算两个日期间隔的天数
+// 计算两个日期间隔的天数
 func DateDays(startDate, endDate, format string) int {
 	startTime, _ := time.Parse(format, startDate)
 	endTime, _ := time.Parse(format, endDate)
 	return int(endTime.Sub(startTime).Hours()/24) + 1
 }
 
-//计算unix timestamp当天的起始unix timestamp
+// 计算unix timestamp当天的起始unix timestamp
 func DayStartTimestamp(timestamp int64) int64 {
 	s := time.Unix(timestamp, 0).Format(Format.Date)
-	return ToTimestamp(s, Format.Date)
+	return ToTimestampLocal(s, Format.Date)
 }
